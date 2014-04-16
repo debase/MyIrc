@@ -5,18 +5,18 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Wed Apr  9 10:30:03 2014 Maxime
+## Last update Tue Apr 15 17:43:39 2014 Etienne
 ##
 
-SRC=		./main.c
+SRC		= ./main.c
 
-OBJ=		$(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
-NAME=		../../client
+NAME		= ../../client
 
-CFLAGS= -W -Wall -Werror -Wextra
+CFLAGS		= -W -Wall -Werror -Wextra
 
-INVOCATION=	cc
+INVOCATION	= cc
 
 $(NAME):	$(OBJ)
 		$(INVOCATION) $(CFLAGS) $(OBJ) -o $(NAME)

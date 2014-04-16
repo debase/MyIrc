@@ -5,21 +5,27 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Wed Apr  9 10:30:19 2014 Maxime
+## Last update Wed Apr 16 17:09:45 2014 Etienne
 ##
 
-SRC=		./main.c
+SRC		= ./main.c		\
+		  ./socket_serveur.c	\
+		  ./init_data.c		\
+		  ./add_client.c	\
+		  ./list.c
 
-OBJ=		$(SRC:.c=.o)
+OBJ		= $(SRC:.c=.o)
 
-NAME=		../../serveur
+NAME		= ../../serveur
 
-CFLAGS=		-W -Wall -Werror -Wextra
+INCLUDE		= ./includes/
 
-INVOCATION=	cc
+CFLAGS		= -W -Wall -Werror -Wextra -I$(INCLUDE) -g
+
+INVOCATION	= cc
 
 $(NAME):	$(OBJ)
-		$(INVOCATION) $(CFLAGS) $(OBJ) -o $(NAME)
+		$(INVOCATION) -o $(NAME) $(CFLAGS) $(OBJ)
 
 all:		$(NAME)
 
