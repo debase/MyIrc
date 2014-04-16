@@ -5,16 +5,19 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Tue Apr 15 17:43:39 2014 Etienne
+## Last update Wed Apr 16 21:18:21 2014 Etienne
 ##
 
-SRC		= ./main.c
+SRC		= ./main.c		\
+		  ./socket_client.c
 
 OBJ		= $(SRC:.c=.o)
 
 NAME		= ../../client
 
-CFLAGS		= -W -Wall -Werror -Wextra
+INCDIR		= ./includes
+
+CFLAGS		= -W -Wall -Werror -Wextra -I$(INCDIR)
 
 INVOCATION	= cc
 
