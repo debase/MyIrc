@@ -5,7 +5,7 @@
 ** Login   <maxime@epitech.net>
 **
 ** Started on  Tue Apr  8 16:50:26 2014 Maxime
-** Last update Wed Apr 16 17:47:57 2014 Etienne
+** Last update Wed Apr 23 10:09:49 2014 Etienne
 */
 
 #include <string.h>
@@ -34,13 +34,15 @@ void		set_fd_client(fd_set *readfd, t_serveur *serv)
 void		check_client_fd(t_serveur *serv, fd_set *readfd)
 {
   t_client	*tmp;
+  char		buff[4096];
 
   tmp = serv->client;
   while (tmp)
     {
       if (FD_ISSET(tmp->cfd, readfd))
   	{
-	  // do stuff
+	  recv(tmp->cfd, buff, 4096, 0);
+	  printf ("rcv : %s\n", buff);
   	}
       tmp = tmp->next;
     }
