@@ -16,7 +16,8 @@ SOURCES += main.cpp\
         ircdisplay.cpp \
     client_manage_msg.c \
     socket_client.c \
-    connect.c
+    connect.c \
+    select_loop.c
 
 CXXFLAGS += -g
 CFLAGS += -g

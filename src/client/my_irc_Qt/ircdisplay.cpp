@@ -7,9 +7,8 @@ ircDisplay::ircDisplay(t_client *client, QWidget *parent) : QWidget(parent)
     chat = new QTextEdit;
     sendButton = new QPushButton(tr("Send"));
     Vbox = new QVBoxLayout;
-    textSender = new QTextEdit;
+    textSender = new QLineEdit;
 
-    textSender->setFixedHeight(40);
     chat->setReadOnly(true);
     Vbox->addWidget(chat);
     Vbox->addWidget(textSender);
@@ -29,6 +28,14 @@ ircDisplay::~ircDisplay()
 {
 }
 
+void                ircDisplay::keyPressEvent(QKeyEvent *event)
+{
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+    {
+        sendDisplay();
+    }
+}
+
 void                ircDisplay::display_msg(char *msg)
 {
     chat->insertPlainText(QString(msg));
@@ -36,51 +43,29 @@ void                ircDisplay::display_msg(char *msg)
 
 void                ircDisplay::sendDisplay()
 {
-    const char      *data;
+    char            *data;
     std::string     cmd;
 
-    if (this->textSender->toPlainText().size() != 0)
+    if (this->textSender->text().size() != 0)
     {
-       cmd = this->textSender->toPlainText().toStdString();
+       cmd = this->textSender->text().toStdString();
        std::cout << cmd << std::endl;
-       send_msg(this->client, strdup(cmd.c_str()));
+       data = strdup(cmd.c_str());
+       if (data != NULL)
+           send_msg(this->client, data);
+       else
+           snprintf(client->logger, BUFF_SIZE, ALLOC_ERR_MSG);
        if (client->logger[0])
        {
-           chat->insertPlainText(client->logger);
+           chat->insertPlainText("--->  " + QString(client->logger));
            memset(client->logger, 0, BUFF_SIZE);
        }
-       //std::cout << "toto" << std::endl;
        this->textSender->clear();
     }
 }
 
-void        ircDisplay::display()
+void        ircDisplay::loop()
 {
-    int     select_ret;
-    
-    select_ret= 0;
-    if (client->connect == CONNECTED)
-    {
-        FD_ZERO(&client->read_fds);
-        FD_ZERO(&client->write_fds);
-        FD_SET(client->sfd, &client->read_fds);
-        FD_SET(client->sfd, &client->write_fds);
-        select_ret = select(4, &client->read_fds, &client->write_fds,
-                       NULL, NULL);
-        if (select_ret != -1)
-        {
-            if (FD_ISSET(client->sfd, &client->read_fds))
-            {
-//                manage_client_rcv_msg(this->client);
-            }
-            if (FD_ISSET(client->sfd, &client->write_fds))
-            {
-//                manage_client_send_msg(this->client);
-            }
-        }
-        else
-        {
-        }
-    }
-   QTimer::singleShot(5000, this, SLOT(display()));
+    select_loop(this->client);
+    QTimer::singleShot(5000, this, SLOT(loop()));
 }

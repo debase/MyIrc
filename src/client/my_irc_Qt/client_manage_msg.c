@@ -11,6 +11,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 #include "client.h"
 
 char        **to_word_tab(char *str, char *cmd[], int size, const char *token)
@@ -19,10 +21,6 @@ char        **to_word_tab(char *str, char *cmd[], int size, const char *token)
   int     index;
 
   index = 0;
-  if (!str)
-    {
-      return (NULL);
-    }
   while ((index < (size - 1)) && (cmd[index] = strtok_r((index == 0 ? str : NULL),
 							token, &save)) != NULL)
     {
@@ -34,9 +32,6 @@ char        **to_word_tab(char *str, char *cmd[], int size, const char *token)
 
 void		send_msg(t_client *client, char *cmd)
 {
-  int		index;
-
-  index = 0;
   to_word_tab(cmd, client->cmd, 5, " \t");
   if (!client->cmd[0])
     return;
@@ -45,9 +40,9 @@ void		send_msg(t_client *client, char *cmd)
       connect_client(client, client->cmd[1]);
     }
   else if (client->connect == CONNECTED)
-    {
-      //        put_msg_in_buff();
-    }
+  {
+      send(client->sfd, cmd, strlen(cmd), 0);
+  }
   else
     snprintf(client->logger, BUFF_SIZE, "You are not connected"
          " : Use /server <host> <port> to connect you\n");

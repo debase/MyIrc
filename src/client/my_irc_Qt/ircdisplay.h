@@ -2,9 +2,11 @@
 #define IRCDISPLAY_H
 
 #include <QWidget>
+#include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+
 extern "C"
 {
     #include "client.h"
@@ -17,12 +19,13 @@ class ircDisplay : public QWidget
 public:
     ircDisplay(t_client *client, QWidget *parent = 0);
     ~ircDisplay();
-public slots:
     void    display_msg(char *msg);
+    void    keyPressEvent(QKeyEvent *event);
+public slots:
+    void    loop();
     void    sendDisplay();
-    void    display();
 private:
-    QTextEdit       *textSender;
+    QLineEdit       *textSender;
     QTextEdit       *chat;
     QPushButton     *sendButton;
     QVBoxLayout     *Vbox;

@@ -49,11 +49,9 @@ char        *parse_port(t_client *client, char *str)
     i = 0;
     occurence = index(str, ':');
     if (occurence == NULL || *(occurence + 1) == 0)
-    {
-        snprintf(client->logger, BUFF_SIZE, "Missing port to connect you\n");
-        return (NULL);
-    }
-    occurence += 1;
+        occurence = DEFAULT_PORT;
+    else
+        occurence += 1;
     if ((port = strdup(occurence)) == NULL)
     {
         snprintf(client->logger, BUFF_SIZE, "Allocation Error\n");
@@ -71,6 +69,30 @@ char        *parse_port(t_client *client, char *str)
     return (port);
 }
 
+int         check_host_port(t_client *client)
+{
+    int     invalid;
+
+    invalid = 0;
+    if (client->host == NULL || client->port == NULL)
+    {
+        invalid = 1;
+    }
+    else if (atoi(client->port) < 0 || atoi(client->port) > 65535)
+    {
+        snprintf(client->logger, BUFF_SIZE, "Invalid port : 0 < port < 65535\n");
+        invalid = 1;
+    }
+    if (invalid)
+    {
+        if (client->host != NULL)
+            free(client->host);
+        if (client->port != NULL)
+            free(client->port);
+    }
+    return (invalid);
+}
+
 void         connect_client(t_client *client, char *param)
 {
     client->host = NULL;
@@ -80,25 +102,19 @@ void         connect_client(t_client *client, char *param)
         snprintf(client->logger, BUFF_SIZE, "missing host[:port]\n");
         return;
     }
-    if ((client->host = parse_host(client, param)) == NULL
-        || (client->port = parse_port(client, param)) == NULL)
-    {
-        if (client->host != NULL)
-            free(client->host);
-        if (client->port != NULL)
-            free(client->port);
+    client->host = parse_host(client, param);
+    client->port = parse_port(client, param);
+    if (check_host_port(client) == 1)
         return;
-    }
-    if (atoi(client->port) < 0 || atoi(client->port) > 65535)
+    client->sfd = create_socket_client(client->host, client->port);
+    if (client->sfd < 0)
     {
-        snprintf(client->logger, BUFF_SIZE, "Invalid port : 0 < port < 65535\n");
-        if (client->host != NULL)
-            free(client->host);
-        if (client->port != NULL)
-            free(client->port);
-        return;
+        snprintf(client->logger, BUFF_SIZE, "Error : couldn't connect to %s:%s\n",
+                 client->host, client->port);
     }
-//    printf("host = %s\n", client->host);
-//    printf("port = %s\n", client->port);
+    else
+    {
+        client->connect = CONNECTED;
+    }
 }
 

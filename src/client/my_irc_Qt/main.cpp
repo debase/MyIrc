@@ -16,6 +16,6 @@ int                 main(int argc, char *argv[])
     init_client(&client);
     display = new ircDisplay(&client);
     display->show();
-    display->display();
+    display->loop();
     return (a.exec());
 }
