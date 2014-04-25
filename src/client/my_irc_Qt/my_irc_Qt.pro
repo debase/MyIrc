@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     client_manage_msg.c \
     socket_client.c \
     connect.c \
-    select_loop.c
+    select_loop.c \
+    str_to_wordtab.c
 
 CXXFLAGS += -g
 CFLAGS += -g
@@ -25,4 +26,5 @@ CFLAGS += -g
 INCLUDEPATH += ../includes
 
 HEADERS  += ircdisplay.h \
-    ../includes/client.h
+    ../includes/client.h \
+    ../includes/str_to_wordtab.h

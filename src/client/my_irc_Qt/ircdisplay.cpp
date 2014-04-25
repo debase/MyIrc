@@ -21,6 +21,7 @@ ircDisplay::ircDisplay(t_client *client, QWidget *parent) : QWidget(parent)
     this->client = client;
     this->resize(600, 500);
     this->setLayout(Vbox);
+    textSender->setMaxLength(BUFF_SIZE - 1);
     connect(sendButton, SIGNAL(clicked()), this, SLOT(sendDisplay()));
 }
 
@@ -48,7 +49,7 @@ void                ircDisplay::sendDisplay()
 
     if (this->textSender->text().size() != 0)
     {
-       cmd = this->textSender->text().toStdString();
+        cmd = this->textSender->text().toStdString() + "\n";
        std::cout << cmd << std::endl;
        data = strdup(cmd.c_str());
        if (data != NULL)
@@ -67,5 +68,6 @@ void                ircDisplay::sendDisplay()
 void        ircDisplay::loop()
 {
     select_loop(this->client);
-    QTimer::singleShot(5000, this, SLOT(loop()));
+    std::cout << "loop !" << std::endl;
+    QTimer::singleShot(500, this, SLOT(loop()));
 }

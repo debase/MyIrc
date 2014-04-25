@@ -13,12 +13,10 @@
 
 static void        init_fd_set(t_client *client, struct timeval *tm)
 {
-    tm->tv_sec = 1;
-    tm->tv_usec = 0;
+    tm->tv_sec = 0;
+    tm->tv_usec = 1000;
     FD_ZERO(&client->read_fds);
-    FD_ZERO(&client->write_fds);
     FD_SET(client->sfd, &client->read_fds);
-    FD_SET(client->sfd, &client->write_fds);
 }
 
 void                select_loop(t_client *client)
@@ -30,21 +28,19 @@ void                select_loop(t_client *client)
     if (client->connect == CONNECTED)
     {
         init_fd_set(client, &tm);
-        select_ret = select(4, &client->read_fds, &client->write_fds,
-                       NULL, &tm);
+        select_ret = select(client->sfd + 1, &client->read_fds, NULL,
+                            NULL, &tm);
         if (select_ret != -1)
         {
             if (FD_ISSET(client->sfd, &client->read_fds))
             {
-//                manage_client_rcv_msg(this->client);
-            }
-            if (FD_ISSET(client->sfd, &client->write_fds))
-            {
-//                manage_client_send_msg(this->client);
+                manage_client_rcv_msg(this->client);
             }
         }
         else
         {
+            snprintf(client->logger, BUFF_SIZE, "Select error\n");
+            return;
         }
     }
 }

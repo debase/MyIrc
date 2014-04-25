@@ -14,34 +14,29 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include "client.h"
-
-char        **to_word_tab(char *str, char *cmd[], int size, const char *token)
-{
-  char    *save;
-  int     index;
-
-  index = 0;
-  while ((index < (size - 1)) && (cmd[index] = strtok_r((index == 0 ? str : NULL),
-							token, &save)) != NULL)
-    {
-      index++;
-    }
-  cmd[index] = NULL;
-  return (cmd);
-}
+#include "str_to_wordtab.h"
 
 void		send_msg(t_client *client, char *cmd)
 {
-  to_word_tab(cmd, client->cmd, 5, " \t");
+  client->cmd = str_to_wordtab(cmd, " \t");
   if (!client->cmd[0])
     return;
   if (!strcmp(client->cmd[0], "/server") && client->connect != CONNECTED)
     {
+      if (client->cmd[1])
+          client->cmd[1][strlen(client->cmd[1]) - 1] = '\0';
       connect_client(client, client->cmd[1]);
     }
   else if (client->connect == CONNECTED)
   {
-      send(client->sfd, cmd, strlen(cmd), 0);
+      if (send(client->sfd, cmd, strlen(cmd), 0) <= 0)
+      {
+          printf("toto\n");
+          snprintf(client->logger, BUFF_SIZE,
+                   "Server seem being broken ... You are now disconnect\n");
+          client->connect = DISCONNECTED;
+          close(client->sfd);
+      }
   }
   else
     snprintf(client->logger, BUFF_SIZE, "You are not connected"
