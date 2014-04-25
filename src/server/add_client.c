@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 14:49:58 2014 Etienne
-** Last update Wed Apr 16 17:00:03 2014 Etienne
+** Last update Thu Apr 24 20:44:36 2014 Etienne
 */
 
 #include "serveur.h"
@@ -32,7 +32,21 @@ void		add_new_client(t_serveur *serv)
   	      __PRETTY_FUNCTION__);
       exit(EXIT_FAILURE);
     }
+  printf ("New client IP %s join the server\n",
+	  inet_ntoa(new_client->cli_addr.sin_addr));
   new_client->id = serv->nb_client;
+  snprintf(new_client->name, BUFF_SIZE, "user%d", new_client->id);
   serv->nb_client++;
-  list_ptr_list(serv->client);
+}
+
+void		rm_client(t_serveur *serv, t_client *client)
+{
+  close(client->cfd);
+  if (client->chan[0])
+    {
+      //avertir du depart
+    }
+  memset(client->chan, 0, sizeof(client->chan));
+  serv->nb_client--;
+  rm_elem_list(&serv->client, client);
 }

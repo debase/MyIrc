@@ -5,13 +5,14 @@
 ** Login   <maxime@epitech.net>
 **
 ** Started on  Tue Apr  8 16:50:26 2014 Maxime
-** Last update Wed Apr 23 10:09:49 2014 Etienne
+** Last update Thu Apr 24 14:49:23 2014 Etienne
 */
 
 #include <string.h>
 #include <sys/select.h>
 #include <sys/time.h>
 #include "serveur.h"
+#include "str_to_wordtab.h"
 
 int		usage(char *pname)
 {
@@ -23,10 +24,13 @@ void		set_fd_client(fd_set *readfd, t_serveur *serv)
 {
   t_client	*tmp;
 
+  serv->max_fd = serv->fd;
   tmp = serv->client;
   while (tmp)
     {
       FD_SET(tmp->cfd, readfd);
+      if (tmp->cfd > serv->max_fd)
+	serv->max_fd = tmp->cfd;
       tmp = tmp->next;
     }
 }
@@ -34,17 +38,21 @@ void		set_fd_client(fd_set *readfd, t_serveur *serv)
 void		check_client_fd(t_serveur *serv, fd_set *readfd)
 {
   t_client	*tmp;
-  char		buff[4096];
+  t_client	*tmp2;
 
   tmp = serv->client;
   while (tmp)
     {
       if (FD_ISSET(tmp->cfd, readfd))
   	{
-	  recv(tmp->cfd, buff, 4096, 0);
-	  printf ("rcv : %s\n", buff);
+	  tmp2 = tmp->next;
+	  read_client(serv, tmp);
+	  tmp = tmp2;
   	}
-      tmp = tmp->next;
+      else
+	{
+	  tmp = tmp->next;
+	}
     }
 }
 
@@ -59,7 +67,7 @@ void			serv_loop(t_serveur *serv)
       FD_ZERO(&readfd);
       FD_SET(serv->fd, &readfd);
       set_fd_client(&readfd, serv);
-      select_ret = select(serv->nb_client + 4, &readfd, NULL, NULL, NULL);
+      select_ret = select(serv->max_fd + 1, &readfd, NULL, NULL, NULL);
       if (select_ret != -1)
 	{
 	  if (FD_ISSET(serv->fd, &readfd))

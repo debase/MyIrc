@@ -5,14 +5,20 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Wed Apr 16 17:09:45 2014 Etienne
+## Last update Fri Apr 25 13:55:59 2014 Etienne
 ##
 
 SRC		= ./main.c		\
 		  ./socket_serveur.c	\
 		  ./init_data.c		\
 		  ./add_client.c	\
-		  ./list.c
+		  ./list.c		\
+		  ./str_to_wordtab.c	\
+		  ./parse_and_exec.c	\
+		  ./send.c		\
+		  ./cmd_serv.c		\
+		  ./read_client.c
+
 
 OBJ		= $(SRC:.c=.o)
 
@@ -20,7 +26,7 @@ NAME		= ../../serveur
 
 INCLUDE		= ./includes/
 
-CFLAGS		= -W -Wall -Werror -Wextra -I$(INCLUDE) -g
+CFLAGS		= -W -Wall -Wextra -I$(INCLUDE) -g
 
 INVOCATION	= cc
 

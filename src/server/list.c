@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 15:49:35 2014 Etienne
-** Last update Wed Apr 16 17:47:25 2014 Etienne
+** Last update Thu Apr 24 14:38:56 2014 Etienne
 */
 
 #include "list.h"
@@ -51,8 +51,13 @@ static void		rm_first_elem_list(t_client **list)
     {
       (*list)->next->prev = NULL;
       (*list) = (*list)->next;
+      free(ptete);
     }
-  free(ptete);
+  else
+    {
+      free(ptete);
+      (*list) = NULL;
+    }
 }
 
 void			rm_elem_list(t_client **list, t_client *elem)
@@ -74,6 +79,7 @@ void			rm_elem_list(t_client **list, t_client *elem)
 	      if (tmp->next != NULL)
 		tmp->next->prev = tmp->prev;
 	      free(tmp);
+	      return ;
 	    }
 	  tmp = tmp->next;
 	}
