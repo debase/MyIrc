@@ -5,19 +5,19 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Mon Apr 21 16:44:42 2014 Etienne
-** Last update Sun Apr 27 00:59:13 2014 Etienne
+** Last update Sun Apr 27 01:46:08 2014 Etienne
 */
 
-#include "client.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+#include "client.h"
 
-char        *parse_host(t_client *client, char *str)
+char		*parse_host(t_client *client, char *str)
 {
-  int     index;
-  char    *host;
+  int		index;
+  char		*host;
 
   index = 0;
   while (str[index])
@@ -40,11 +40,11 @@ char        *parse_host(t_client *client, char *str)
   return (host);
 }
 
-char        *parse_port(t_client *client, char *str)
+char		*parse_port(t_client *client, char *str)
 {
-  int     i;
-  char    *occurence;
-  char    *port;
+  int		i;
+  char		*occurence;
+  char		*port;
 
   i = 0;
   occurence = index(str, ':');
@@ -69,9 +69,9 @@ char        *parse_port(t_client *client, char *str)
   return (port);
 }
 
-int         check_host_port(t_client *client)
+int		check_host_port(t_client *client)
 {
-  int     invalid;
+  int		invalid;
 
   invalid = 0;
   if (client->host == NULL || client->port == NULL)
@@ -93,7 +93,7 @@ int         check_host_port(t_client *client)
   return (invalid);
 }
 
-void         connect_client(t_client *client, char *param)
+void		connect_client(t_client *client, char *param)
 {
   client->host = NULL;
   client->port = NULL;

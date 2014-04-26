@@ -5,14 +5,14 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Fri Apr 25 14:36:35 2014 Etienne
-** Last update Fri Apr 25 22:38:45 2014 Etienne
+** Last update Sun Apr 27 01:47:17 2014 Etienne
 */
 
 #include <unistd.h>
 #include <string.h>
 #include "client.h"
 
-static int	add_char_buff(t_ring_buff *ring_buff, char c)
+static int		add_char_buff(t_ring_buff *ring_buff, char c)
 {
   if ((ring_buff->end + 2) % BUFF_SIZE != 0)
     {
@@ -29,7 +29,7 @@ static int	add_char_buff(t_ring_buff *ring_buff, char c)
 static int	put_ring_buff(t_ring_buff *ring_buff, char *buff, ssize_t len)
 {
   int		i;
-  int       index;
+  int		index;
 
   index = -1;
   i = 0;

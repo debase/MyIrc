@@ -1,3 +1,13 @@
+//
+// moc_ircdisplay.cpp for moc_ircdisplay in /tmp/PSU_2013_myirc/src/client
+//
+// Made by Etienne
+// Login   <debas_e@epitech.net>
+//
+// Started on  Sun Apr 27 01:49:46 2014 Etienne
+// Last update Sun Apr 27 01:49:46 2014 Etienne
+//
+
 /****************************************************************************
 ** Meta object code from reading C++ file 'ircdisplay.h'
 **
@@ -55,7 +65,7 @@ void ircDisplay::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
 }
 
 const QMetaObjectExtraData ircDisplay::staticMetaObjectExtraData = {
-    0,  qt_static_metacall 
+    0,  qt_static_metacall
 };
 
 const QMetaObject ircDisplay::staticMetaObject = {

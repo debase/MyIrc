@@ -5,7 +5,7 @@
 ## Login   <debas_e@epitech.net>
 ## 
 ## Started on  Sat Apr 26 21:11:20 2014 Etienne
-## Last update Sat Apr 26 22:25:44 2014 Etienne
+## Last update Sun Apr 27 01:40:19 2014 Etienne
 ##
 
 NAME		= ../../client
@@ -25,7 +25,7 @@ LIBS		= -L/usr/lib64 -lQtGui -L/usr/X11R6/lib -lQtCore -lpthread
 CXXINCPATH     	= -I/usr/share/qt4/mkspecs/default -I/usr/include/QtCore
 CXXINCPATH     	+= -I/usr/include/QtGui -I/usr/include -I./includes -I.
 
-CINCPATH     	= -I./includes
+CINCPATH     	= -I./includes/
 
 SOURCES       	= main.cpp \
 		  ircdisplay.cpp \
@@ -54,10 +54,10 @@ $(NAME): $(OBJECTS)
 
 all:	$(NAME)
 
-main.o: main.cpp ircdisplay.h
+main.o: main.cpp ./includes/ircdisplay.h
 	$(CXX) -c $(CXXFLAGS) $(CXXINCPATH) -o main.o main.cpp
 
-ircdisplay.o: ircdisplay.cpp ircdisplay.h
+ircdisplay.o: ircdisplay.cpp ./includes/ircdisplay.h
 	$(CXX) -c $(CXXFLAGS) $(CXXINCPATH) -o ircdisplay.o ircdisplay.cpp
 
 moc_ircdisplay.o: moc_ircdisplay.cpp
