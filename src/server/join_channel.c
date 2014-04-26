@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 03:53:04 2014 Etienne
-** Last update Sat Apr 26 03:53:24 2014 Etienne
+** Last update Sat Apr 26 04:36:28 2014 Etienne
 */
 
 #include <string.h>
@@ -38,6 +38,8 @@ void		join_channel(t_serveur *serv, t_client *client, char **cmd)
 
   if (cmd[1] == NULL)
     send_info_msg(client, "Invalid channel !");
+  else if (!strcmp(client->chan, cmd[1]))
+    send_info_msg(client, "You are already connected to this channel");
   else
     {
       if (client->chan[0])
