@@ -1,0 +1,57 @@
+  
+   Makefile2 for Makefile in /home/debas_e/Project/System_Unix/PSU_2013_myirc/src/client/my_irc_Qt
+   
+   Made by Etienne
+   Login   <debas_e@epitech.net>
+   
+   Started on  Sat Apr 26 20:51:09 2014 Etienne
+   Last update Sat Apr 26 21:11:45 2014 Etienne
+  
+
+NAME		= client
+
+CC		= gcc
+
+CXX		= g++
+
+DEFINES       	= -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED
+
+CFLAGS        	= -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
+
+CXXFLAGS      	= -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
+
+LFLAGS		= -Wl,-O1
+
+LIBS		= $(SUBLIBS)  -L/usr/lib64 -lQtGui -L/usr/lib64 -L/usr/X11R6/lib -lQtCore -lpthread
+
+INCPATH       	= -I/usr/share/qt4/mkspecs/default -I/usr/include/QtCore
+INCPATH       	+= -I/usr/include/QtGui -I/usr/include -I/includes -I.
+
+CSRCS		= client_manage_msg.c 	\
+		  socket_client.c	\
+		  connect.c 		\
+		  select_loop.c 	\
+		  str_to_wordtab.c 	\
+		  ring_buff.c
+
+CXXSRCS		= main.cpp		\
+		  ircdisplay.cpp
+
+
+COBJS		= $(CSRCS:.c=.o)
+
+CXXOBJS		= $(CXXSRCS:.cpp=.o)
+
+LINK		= g++
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o "$@" "$<"
+
+$(NAME): $(CXXBJS) $(COBJS)
+	$(LINK) $(LFLAGS) -o $(NAME) $(OBJECTS) $(OBJCOMP) $(LIBS)
+
+all:	$(NAME)
+

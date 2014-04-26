@@ -1,35 +1,91 @@
 ##
-## Makefile for ftp in /home/maxime/projet/actu/PSU_2013_myftp
+## Makefile for Makefile in /home/debas_e/Project/System_Unix/PSU_2013_myirc/src/client/my_irc_Qt
 ## 
-## Made by Maxime
-## Login   <maxime@epitech.net>
+## Made by Etienne
+## Login   <debas_e@epitech.net>
 ## 
-## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Wed Apr 16 21:18:21 2014 Etienne
+## Started on  Sat Apr 26 21:11:20 2014 Etienne
+## Last update Sat Apr 26 22:13:23 2014 Etienne
 ##
 
-SRC		= ./main.c		\
-		  ./socket_client.c
+NAME		= client
 
-OBJ		= $(SRC:.c=.o)
+CC		= gcc
 
-NAME		= ../../client
+CXX		= g++
 
-INCDIR		= ./includes
+CFLAGS        	= -Wall -Wall -Wextra
 
-CFLAGS		= -W -Wall -Werror -Wextra -I$(INCDIR)
+CXXFLAGS      	= -Wall -Wall -Wextra
 
-INVOCATION	= cc
+LFLAGS		= -Wl,-O1
 
-$(NAME):	$(OBJ)
-		$(INVOCATION) $(CFLAGS) $(OBJ) -o $(NAME)
+LIBS		= -L/usr/lib64 -lQtGui -L/usr/X11R6/lib -lQtCore -lpthread
 
-all:		$(NAME)
+CXXINCPATH     	= -I/usr/share/qt4/mkspecs/default -I/usr/include/QtCore
+CXXINCPATH     	+= -I/usr/include/QtGui -I/usr/include -I./includes -I.
+
+CINCPATH     	= -I./includes
+
+SOURCES       	= main.cpp \
+		  ircdisplay.cpp \
+		  moc_ircdisplay.cpp \
+		  client_manage_msg.c \
+		  socket_client.c \
+		  connect.c \
+		  select_loop.c \
+		  str_to_wordtab.c \
+		  ring_buff.c
+
+OBJECTS       	= main.o \
+		  moc_ircdisplay.o \
+		  ircdisplay.o \
+		  client_manage_msg.o \
+		  socket_client.o \
+		  connect.o \
+		  select_loop.o \
+		  str_to_wordtab.o \
+		  ring_buff.o
+
+LINK		= g++
+
+$(NAME): $(OBJECTS)
+	$(LINK) $(LFLAGS) -o $(NAME) $(OBJECTS) $(LIBS)
+
+all:	$(NAME)
+
+main.o: main.cpp ircdisplay.h
+	$(CXX) -c $(CXXFLAGS) $(CXXINCPATH) -o main.o main.cpp
+
+ircdisplay.o: ircdisplay.cpp ircdisplay.h
+	$(CXX) -c $(CXXFLAGS) $(CXXINCPATH) -o ircdisplay.o ircdisplay.cpp
+
+moc_ircdisplay.o: moc_ircdisplay.cpp
+	$(CXX) -c $(CXXFLAGS) $(CXXINCPATH) -o moc_ircdisplay.o moc_ircdisplay.cpp
+
+client_manage_msg.o: client_manage_msg.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o client_manage_msg.o client_manage_msg.c
+
+socket_client.o: socket_client.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o socket_client.o socket_client.c
+
+connect.o: connect.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o connect.o connect.c
+
+select_loop.o: select_loop.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o select_loop.o select_loop.c
+
+str_to_wordtab.o: str_to_wordtab.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o str_to_wordtab.o str_to_wordtab.c
+
+ring_buff.o: ring_buff.c
+	$(CC) -c $(CFLAGS) $(CINCPATH) -o ring_buff.o ring_buff.c
 
 clean:
-		rm -f $(OBJ)
+	$(RM) $(OBJECTS)
 
-fclean:		clean
-		rm -f $(NAME)
+fclean:	clean
+	$(RM) $(NAME)
 
-re:		fclean all
+re:	fclean all
+
