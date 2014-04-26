@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Thu Apr 17 00:07:25 2014 Etienne
-** Last update Mon Apr 21 16:56:09 2014 Etienne
+** Last update Sun Apr 27 00:57:45 2014 Etienne
 */
 
 #include <string.h>
@@ -23,25 +23,25 @@ void		send_msg(t_client *client, char *cmd)
     return;
   if (!strcmp(client->cmd[0], "/server") && client->connect != CONNECTED)
     {
-      if (client->cmd[1])
-          client->cmd[1][strlen(client->cmd[1]) - 1] = '\0';
+      if (client->cmd[1] && client->cmd[1][strlen(client->cmd[1]) - 1] == '\n')
+	client->cmd[1][strlen(client->cmd[1]) - 1] = '\0';
       connect_client(client, client->cmd[1]);
     }
   else if (!strcmp(client->cmd[0], "/server") && client->connect == CONNECTED)
-  {
+    {
       snprintf(client->logger, BUFF_SIZE, "You are already connected\n");
-  }
+    }
   else if (client->connect == CONNECTED)
-  {
+    {
       if (send(client->sfd, cmd, strlen(cmd), 0) <= 0)
-      {
+	{
           snprintf(client->logger, BUFF_SIZE,
                    "Server seem being broken ... You are now disconnect\n");
           client->connect = DISCONNECTED;
           close(client->sfd);
-      }
-  }
+	}
+    }
   else
     snprintf(client->logger, BUFF_SIZE, "You are not connected"
-         " : Use /server <host> <port> to connect you\n");
+	     " : Use /server <host> <port> to connect you\n");
 }

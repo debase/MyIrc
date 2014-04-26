@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Mon Apr 21 16:44:42 2014 Etienne
-** Last update Mon Apr 21 16:44:44 2014 Etienne
+** Last update Sun Apr 27 00:59:13 2014 Etienne
 */
 
 #include "client.h"
@@ -16,105 +16,105 @@
 
 char        *parse_host(t_client *client, char *str)
 {
-    int     index;
-    char    *host;
+  int     index;
+  char    *host;
 
-    index = 0;
-    while (str[index])
+  index = 0;
+  while (str[index])
     {
-        if (str[index] == ':')
-            break;
-        index++;
+      if (str[index] == ':')
+	break;
+      index++;
     }
-    if (index == 0)
+  if (index == 0)
     {
-        snprintf(client->logger, BUFF_SIZE, "Missing host to connect you\n");
-        return (NULL);
+      snprintf(client->logger, BUFF_SIZE, "Missing host to connect you\n");
+      return (NULL);
     }
-    if ((host = strndup(str, index)) == NULL)
+  if ((host = strndup(str, index)) == NULL)
     {
-        snprintf(client->logger, BUFF_SIZE, "Allocation Error\n");
-        return (NULL);
+      snprintf(client->logger, BUFF_SIZE, "Allocation Error\n");
+      return (NULL);
     }
-    host[index] = '\0';
-    return (host);
+  host[index] = '\0';
+  return (host);
 }
 
 char        *parse_port(t_client *client, char *str)
 {
-    int     i;
-    char    *occurence;
-    char    *port;
+  int     i;
+  char    *occurence;
+  char    *port;
 
-    i = 0;
-    occurence = index(str, ':');
-    if (occurence == NULL || *(occurence + 1) == 0)
-        occurence = DEFAULT_PORT;
-    else
-        occurence += 1;
-    if ((port = strdup(occurence)) == NULL)
+  i = 0;
+  occurence = index(str, ':');
+  if (occurence == NULL || *(occurence + 1) == 0)
+    occurence = DEFAULT_PORT;
+  else
+    occurence += 1;
+  if ((port = strdup(occurence)) == NULL)
     {
-        snprintf(client->logger, BUFF_SIZE, "Allocation Error\n");
-        return (NULL);
+      snprintf(client->logger, BUFF_SIZE, "Allocation Error\n");
+      return (NULL);
     }
-    while (port[i])
+  while (port[i])
     {
-        if (port[i] < '0' || port[i] > '9')
+      if (port[i] < '0' || port[i] > '9')
         {
-            snprintf(client->logger, BUFF_SIZE, "Invalid port\n");
-            return (NULL);
+	  snprintf(client->logger, BUFF_SIZE, "Invalid port\n");
+	  return (NULL);
         }
-        i++;
+      i++;
     }
-    return (port);
+  return (port);
 }
 
 int         check_host_port(t_client *client)
 {
-    int     invalid;
+  int     invalid;
 
-    invalid = 0;
-    if (client->host == NULL || client->port == NULL)
+  invalid = 0;
+  if (client->host == NULL || client->port == NULL)
     {
-        invalid = 1;
+      invalid = 1;
     }
-    else if (atoi(client->port) < 0 || atoi(client->port) > 65535)
+  else if (atoi(client->port) < 0 || atoi(client->port) > 65535)
     {
-        snprintf(client->logger, BUFF_SIZE, "Invalid port : 0 < port < 65535\n");
-        invalid = 1;
+      snprintf(client->logger, BUFF_SIZE, "Invalid port : 0 < port < 65535\n");
+      invalid = 1;
     }
-    if (invalid)
+  if (invalid)
     {
-        if (client->host != NULL)
-            free(client->host);
-        if (client->port != NULL)
-            free(client->port);
+      if (client->host != NULL)
+	free(client->host);
+      if (client->port != NULL)
+	free(client->port);
     }
-    return (invalid);
+  return (invalid);
 }
 
 void         connect_client(t_client *client, char *param)
 {
-    client->host = NULL;
-    client->port = NULL;
-    if (param == NULL)
+  client->host = NULL;
+  client->port = NULL;
+  if (param == NULL)
     {
-        snprintf(client->logger, BUFF_SIZE, "missing host[:port]\n");
-        return;
+      snprintf(client->logger, BUFF_SIZE, "missing host[:port]\n");
+      return;
     }
-    client->host = parse_host(client, param);
-    client->port = parse_port(client, param);
-    if (check_host_port(client) == 1)
-        return;
-    client->sfd = create_socket_client(client->host, client->port);
-    if (client->sfd < 0)
+  client->host = parse_host(client, param);
+  client->port = parse_port(client, param);
+  if (check_host_port(client) == 1)
+    return;
+  printf ("Trying to connect to %s:%s\n", client->host, client->port);
+  client->sfd = create_socket_client(client->host, client->port);
+  if (client->sfd < 0)
     {
-        snprintf(client->logger, BUFF_SIZE, "Error : couldn't connect to %s:%s\n",
-                 client->host, client->port);
+      snprintf(client->logger, BUFF_SIZE, "Error : couldn't connect to %s:%s\n",
+	       client->host, client->port);
     }
-    else
+  else
     {
-        client->connect = CONNECTED;
+      client->connect = CONNECTED;
     }
 }
-
