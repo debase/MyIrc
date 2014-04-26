@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Fri Apr 25 21:01:12 2014 Etienne
-** Last update Sat Apr 26 04:11:04 2014 Etienne
+** Last update Sat Apr 26 19:05:37 2014 Etienne
 */
 
 #include <string.h>
@@ -27,7 +27,8 @@ static void	error_part_channel(t_client *client, char *chan)
   send_info_msg(client, buff);
 }
 
-void		part_channel(t_serveur *serv, t_client *client, char **cmd)
+void		part_channel(t_serveur *serv, t_client *client,
+			     char **cmd, __attribute__((unused))char *str)
 {
   t_client	*list;
   char		buff[BUFF_SIZE];

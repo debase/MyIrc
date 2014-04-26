@@ -5,20 +5,20 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Fri Apr 25 13:46:10 2014 Etienne
-** Last update Sat Apr 26 02:21:21 2014 Etienne
+** Last update Sat Apr 26 19:06:22 2014 Etienne
 */
 
 #include <string.h>
 #include "serveur.h"
 
-static int	search_already_exist(t_serveur *serv, char *nick)
+static int	search_already_exist(t_serveur *serv, char *chan, char *nick)
 {
   t_client	*list;
 
   list = serv->client;
   while (list)
     {
-      if (!strcmp(list->name, nick))
+      if (!strcmp(list->chan, chan) && !strcmp(list->name, nick))
 	{
 	  return (1);
 	}
@@ -27,7 +27,8 @@ static int	search_already_exist(t_serveur *serv, char *nick)
   return (0);
 }
 
-void		change_nick(t_serveur *serv, t_client *client, char **cmd)
+void		change_nick(t_serveur *serv, t_client *client,
+			    char **cmd, __attribute__((unused))char *str)
 {
   char		buff[BUFF_SIZE];
   t_client	*list;
@@ -35,8 +36,8 @@ void		change_nick(t_serveur *serv, t_client *client, char **cmd)
   list = serv->client;
   if (cmd[1] == NULL)
     send_info_msg(client, "Invalid nickname");
-  else if (search_already_exist(serv, cmd[1]))
-    send_info_msg(client, "This nickaname already exist on this channel ...");
+  else if (search_already_exist(serv, client->chan, cmd[1]))
+    send_info_msg(client, "This nickname already exist on this channel ...");
   else
     {
       snprintf(buff, BUFF_SIZE, "%s change is nickname to %s",

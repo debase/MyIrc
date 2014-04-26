@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 03:53:48 2014 Etienne
-** Last update Sat Apr 26 03:54:10 2014 Etienne
+** Last update Sat Apr 26 19:05:16 2014 Etienne
 */
 
 #define _GNU_SOURCE
@@ -30,7 +30,7 @@ static int	already_list(t_serveur *serv, t_client *client)
 
 void		list_channel(t_serveur *serv,
 			     __attribute__((unused))t_client *client,
-			     char **cmd)
+			     char **cmd, __attribute__((unused))char *str)
 {
   t_client	*list;
   char		buff[BUFF_SIZE];

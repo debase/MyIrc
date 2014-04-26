@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Thu Apr 24 21:17:52 2014 Etienne
-** Last update Sat Apr 26 04:02:53 2014 Etienne
+** Last update Sat Apr 26 19:18:41 2014 Etienne
 */
 
 #include "serveur.h"
@@ -18,6 +18,8 @@ t_func_ptr	g_cmd[] =
     {"/nick", change_nick},
     {"/list", list_channel},
     {"/part", part_channel},
+    {"/users", list_users},
+    {"/msg", pv_msg},
     {NULL, NULL}
   };
 
@@ -48,7 +50,7 @@ void		parse_and_exec(char *str, t_serveur *serv, t_client *client)
       {
 	if (!strcmp(g_cmd[i].str, cmd[0]))
 	  {
-	    g_cmd[i].ptr(serv, client, cmd);
+	    g_cmd[i].ptr(serv, client, cmd, str);
 	    free_tab(cmd);
 	    return ;
 	  }

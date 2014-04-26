@@ -5,10 +5,11 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 03:53:04 2014 Etienne
-** Last update Sat Apr 26 04:36:28 2014 Etienne
+** Last update Sat Apr 26 19:07:17 2014 Etienne
 */
 
 #include <string.h>
+#include "cmd_serv.h"
 #include "serveur.h"
 
 void		alert_join_channel(t_serveur *serv, t_client *client)
@@ -32,7 +33,8 @@ void		alert_join_channel(t_serveur *serv, t_client *client)
   send_info_msg(client, buff);
 }
 
-void		join_channel(t_serveur *serv, t_client *client, char **cmd)
+void		join_channel(t_serveur *serv, t_client *client,
+			     char **cmd, char *str)
 {
   char		*cmd_part[2];
 
@@ -45,7 +47,7 @@ void		join_channel(t_serveur *serv, t_client *client, char **cmd)
       if (client->chan[0])
 	{
 	  cmd_part[1] = client->chan;
-	  part_channel(serv, client, cmd_part);
+	  part_channel(serv, client, cmd_part, str);
 	}
       snprintf(client->chan, BUFF_SIZE, cmd[1]);
       alert_join_channel(serv, client);
