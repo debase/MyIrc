@@ -49,8 +49,7 @@ void                ircDisplay::sendDisplay()
 
     if (this->textSender->text().size() != 0)
     {
-        cmd = this->textSender->text().toStdString() + "\n";
-       std::cout << cmd << std::endl;
+       cmd = this->textSender->text().toStdString() + "\n";
        data = strdup(cmd.c_str());
        if (data != NULL)
            send_msg(this->client, data);

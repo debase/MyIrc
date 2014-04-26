@@ -8,6 +8,7 @@
 ** Last update Fri Apr 25 22:38:45 2014 Etienne
 */
 
+#include <unistd.h>
 #include <string.h>
 #include "client.h"
 
