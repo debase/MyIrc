@@ -5,10 +5,10 @@
 ## Login   <debas_e@epitech.net>
 ## 
 ## Started on  Sat Apr 26 21:11:20 2014 Etienne
-## Last update Sat Apr 26 22:13:23 2014 Etienne
+## Last update Sat Apr 26 22:25:44 2014 Etienne
 ##
 
-NAME		= client
+NAME		= ../../client
 
 CC		= gcc
 
