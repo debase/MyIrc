@@ -5,10 +5,20 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Sat Apr 26 19:17:17 2014 Etienne
+## Last update Sat Apr 26 22:24:41 2014 Etienne
 ##
 
-SRC		= ./main.c		\
+NAME		= ../../serveur
+
+INCLUDE		= ./includes/
+
+CFLAGS		= -W -Wall -Wextra -I$(INCLUDE)
+
+CC		= gcc
+
+RM		= rm -rf
+
+SRCS		= ./main.c		\
 		  ./socket_serveur.c	\
 		  ./init_data.c		\
 		  ./add_client.c	\
@@ -24,26 +34,17 @@ SRC		= ./main.c		\
 		  ./pv_msg.c		\
 		  ./read_client.c
 
+OBJS		= $(SRCS:.c=.o)
 
-OBJ		= $(SRC:.c=.o)
-
-NAME		= ../../serveur
-
-INCLUDE		= ./includes/
-
-CFLAGS		= -W -Wall -Wextra -I$(INCLUDE) -g
-
-INVOCATION	= cc
-
-$(NAME):	$(OBJ)
-		$(INVOCATION) -o $(NAME) $(CFLAGS) $(OBJ)
+$(NAME):	$(OBJS)
+		$(CC) -o $(NAME) $(CFLAGS) $(OBJS)
 
 all:		$(NAME)
 
 clean:
-		rm -f $(OBJ)
+		$(RM) $(OBJS)
 
 fclean:		clean
-		rm -f $(NAME)
+		$(RM) $(NAME)
 
 re:		fclean all
