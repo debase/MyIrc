@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 14:49:58 2014 Etienne
-** Last update Thu Apr 24 20:44:36 2014 Etienne
+** Last update Fri Apr 25 23:28:58 2014 Etienne
 */
 
 #include "serveur.h"
@@ -37,16 +37,27 @@ void		add_new_client(t_serveur *serv)
   new_client->id = serv->nb_client;
   snprintf(new_client->name, BUFF_SIZE, "user%d", new_client->id);
   serv->nb_client++;
+  send_info_msg(new_client, "Welcome to QtIRC server :)");
 }
 
 void		rm_client(t_serveur *serv, t_client *client)
 {
-  close(client->cfd);
+  t_client	*list;
+  char		buff[BUFF_SIZE];
+
+  list = serv->client;
+  snprintf(buff, BUFF_SIZE, "%s quit the channel \"%s\"", client->name,
+	   client->chan);
   if (client->chan[0])
     {
-      //avertir du depart
+      while (list)
+	{
+	  if (!strcmp(client->chan, list->chan) && (list != client))
+	    send_info_msg(list, buff);
+	  list = list->next;
+	}
     }
-  memset(client->chan, 0, sizeof(client->chan));
   serv->nb_client--;
+  close(client->cfd);
   rm_elem_list(&serv->client, client);
 }

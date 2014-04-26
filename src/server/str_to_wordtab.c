@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 23 13:09:41 2014 Etienne
-** Last update Wed Apr 23 16:16:05 2014 Etienne
+** Last update Sat Apr 26 00:18:09 2014 Etienne
 */
 
 #include "str_to_wordtab.h"
@@ -36,6 +36,8 @@ char            **str_to_wordtab(char *str, char *token)
   char          *tmp;
   char          *save;
 
+  if ((str = strdup(str)) == NULL)
+    return (STR_WORD_TAB_ERROR);
   if ((ret = malloc(1 * sizeof(char *))) == NULL)
     return (STR_WORD_TAB_ERROR);
   ret[0] = NULL;

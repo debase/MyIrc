@@ -5,7 +5,7 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Fri Apr 25 13:55:59 2014 Etienne
+## Last update Sat Apr 26 03:55:40 2014 Etienne
 ##
 
 SRC		= ./main.c		\
@@ -17,6 +17,9 @@ SRC		= ./main.c		\
 		  ./parse_and_exec.c	\
 		  ./send.c		\
 		  ./cmd_serv.c		\
+		  ./part_channel.c	\
+		  ./join_channel.c	\
+		  ./list_channel.c	\
 		  ./read_client.c
 
 

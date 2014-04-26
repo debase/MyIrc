@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Thu Apr 24 13:30:33 2014 Etienne
-** Last update Thu Apr 24 22:12:42 2014 Etienne
+** Last update Sat Apr 26 03:29:37 2014 Etienne
 */
 
 #include <string.h>
@@ -32,7 +32,7 @@ static int	put_ring_buff(t_ring_buff *ring_buff, char *buff, ssize_t len)
     {
       i++;
     }
-  while (ring_buff->begin != ring_buff->end)
+  while (ring_buff->begin <= ring_buff->end)
     {
       if (ring_buff->buff[ring_buff->begin] == '\n')
 	{

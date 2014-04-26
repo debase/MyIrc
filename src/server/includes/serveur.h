@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 09:42:28 2014 Etienne
-** Last update Fri Apr 25 13:52:46 2014 Etienne
+** Last update Sat Apr 26 03:33:59 2014 Etienne
 */
 
 #ifndef _SERVEUR_H_
@@ -67,5 +67,8 @@ void            send_basic_msg(t_client *from, t_client *to, char *msg);
 void            send_info_msg(t_client *to, char *msg);
 void            send_to_other_channel(t_serveur *serv, t_client *from,
 				      char *msg);
+void		change_nick(t_serveur *serv, t_client *client, char **cmd);
+void		list_channel(t_serveur *serv, t_client *client, char **cmd);
+void		part_channel(t_serveur *serv, t_client *client, char **cmd);
 
 #endif /* !_SERVEUR_H_ */
