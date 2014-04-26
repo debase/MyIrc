@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 10:17:18 2014 Etienne
-** Last update Wed Apr 16 10:37:13 2014 Etienne
+** Last update Sat Apr 26 23:21:51 2014 Etienne
 */
 
 #ifndef _SERVEUR_SOCKET_H_
@@ -23,4 +23,4 @@
 
 int		create_socket_server(const char *port);
 
-#endif /* _SERVEUR_SOCKET_H_ */
+#endif /* !_SERVEUR_SOCKET_H_ */

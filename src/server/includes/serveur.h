@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 09:42:28 2014 Etienne
-** Last update Sat Apr 26 19:04:18 2014 Etienne
+** Last update Sat Apr 26 23:23:33 2014 Etienne
 */
 
 #ifndef _SERVEUR_H_
@@ -22,12 +22,12 @@
 # define	MAX_CLIENT	100
 # define	BUFF_SIZE	4096
 
-typedef struct	s_ring_buff
+typedef struct		s_ring_buff
 {
-  char		buff[BUFF_SIZE];
-  int		end;
-  int		begin;
-}		t_ring_buff;
+  char			buff[BUFF_SIZE];
+  int			end;
+  int			begin;
+}			t_ring_buff;
 
 typedef struct		s_client
 {
@@ -41,31 +41,33 @@ typedef struct		s_client
   struct s_client	*prev;
 }			t_client;
 
-typedef	struct	s_serveur
+typedef	struct		s_serveur
 {
-  int		fd;
-  t_client	*client;
-  int		nb_client;
-  int		max_fd;
-}		t_serveur;
+  int			fd;
+  t_client		*client;
+  int			nb_client;
+  int			max_fd;
+}			t_serveur;
 
 
-typedef struct	s_func_ptr
+typedef struct		s_func_ptr
 {
-  char		*str;
-  void		(*ptr)(t_serveur *, t_client *, char **, char *);
-}		t_func_ptr;
+  char			*str;
+  void			(*ptr)(t_serveur *, t_client *, char **, char *);
+}			t_func_ptr;
 
-int		init_serveur(t_serveur *serv, char *port);
-void		add_new_client(t_serveur *serv);
-void		read_client(t_serveur *serv, t_client *client);
-void		rm_client(t_serveur *serv, t_client *client);
-void		parse_and_exec(char *buff, t_serveur *serv, t_client *client);
-void            send_to_channel(t_serveur *serv, t_client *from, char *msg);
-void            send_pv_msg(t_client *from, t_client *to, char *msg);
-void            send_basic_msg(t_client *from, t_client *to, char *msg);
-void            send_info_msg(t_client *to, char *msg);
-void            send_to_other_channel(t_serveur *serv, t_client *from,
-				      char *msg);
+int			init_serveur(t_serveur *serv, char *port);
+void			add_new_client(t_serveur *serv);
+void			read_client(t_serveur *serv, t_client *client);
+void			rm_client(t_serveur *serv, t_client *client);
+void			parse_and_exec(char *buff, t_serveur *serv,
+				       t_client *client);
+void			send_to_channel(t_serveur *serv, t_client *from,
+					char *msg);
+void			send_pv_msg(t_client *from, t_client *to, char *msg);
+void			send_basic_msg(t_client *from, t_client *to, char *msg);
+void			send_info_msg(t_client *to, char *msg);
+void			send_to_other_channel(t_serveur *serv, t_client *from,
+					      char *msg);
 
 #endif /* !_SERVEUR_H_ */
