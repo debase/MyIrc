@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 03:53:04 2014 Etienne
-** Last update Sat Apr 26 19:07:17 2014 Etienne
+** Last update Sat Apr 26 22:56:50 2014 Etienne
 */
 
 #include <string.h>
@@ -49,7 +49,7 @@ void		join_channel(t_serveur *serv, t_client *client,
 	  cmd_part[1] = client->chan;
 	  part_channel(serv, client, cmd_part, str);
 	}
-      snprintf(client->chan, BUFF_SIZE, cmd[1]);
+      snprintf(client->chan, BUFF_SIZE, "%s", cmd[1]);
       alert_join_channel(serv, client);
     }
 }

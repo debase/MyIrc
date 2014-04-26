@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 18:01:40 2014 Etienne
-** Last update Sat Apr 26 19:06:03 2014 Etienne
+** Last update Sat Apr 26 22:57:08 2014 Etienne
 */
 
 #include <string.h>
@@ -21,7 +21,7 @@ static int	users_loop(t_client *list, t_client *client)
     {
       if (!strcmp(list->chan, client->chan))
 	{
-	  snprintf(buff, BUFF_SIZE, list->name);
+	  snprintf(buff, BUFF_SIZE, "%s", list->name);
 	  send_info_msg(client, buff);
 	  nb_users++;
 	}
