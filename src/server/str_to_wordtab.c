@@ -5,15 +5,15 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 23 13:09:41 2014 Etienne
-** Last update Sat Apr 26 00:18:09 2014 Etienne
+** Last update Sat Apr 26 23:15:24 2014 Etienne
 */
 
 #include "str_to_wordtab.h"
 
-char            **realloc_str_tab(char **old, int new_size)
+char		**realloc_str_tab(char **old, int new_size)
 {
-  char          **new;
-  int           index;
+  char		**new;
+  int		index;
 
   index = 0;
   if ((new = malloc(new_size * sizeof(char *))) == NULL)
@@ -29,12 +29,12 @@ char            **realloc_str_tab(char **old, int new_size)
   return (new);
 }
 
-char            **str_to_wordtab(char *str, char *token)
+char		**str_to_wordtab(char *str, char *token)
 {
-  char          **ret;
-  int           nb_elem;
-  char          *tmp;
-  char          *save;
+  char		**ret;
+  int		nb_elem;
+  char		*tmp;
+  char		*save;
 
   if ((str = strdup(str)) == NULL)
     return (STR_WORD_TAB_ERROR);
