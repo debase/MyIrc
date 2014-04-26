@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 18:53:10 2014 Etienne
-** Last update Sat Apr 26 23:02:59 2014 Etienne
+** Last update Sat Apr 26 23:12:38 2014 Etienne
 */
 
 #include <string.h>
@@ -13,8 +13,8 @@
 
 static void	epur_msg(char *str)
 {
-  int           i;
-  int           j;
+  int		i;
+  int		j;
 
   i = 0;
   j = 0;
@@ -39,7 +39,8 @@ static t_client	*find_user(t_client *list, t_client *client,
 {
   if (!strcmp(user, client->name))
     {
-      snprintf(buff, BUFF_SIZE, "Sending msg to oneself is a little bit retarded ...");
+      snprintf(buff, BUFF_SIZE,
+	       "Sending msg to oneself is a little bit retarded ...");
       return (NULL);
     }
   while (list)
@@ -48,7 +49,8 @@ static t_client	*find_user(t_client *list, t_client *client,
 	return (list);
       list = list->next;
     }
-  snprintf(buff, BUFF_SIZE, "Can't found user \"%s\" on the channel ...", user);
+  snprintf(buff, BUFF_SIZE,
+	   "Can't found user \"%s\" on the channel ...", user);
   return (NULL);
 }
 

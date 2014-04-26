@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 16 15:49:35 2014 Etienne
-** Last update Thu Apr 24 14:38:56 2014 Etienne
+** Last update Sat Apr 26 23:18:51 2014 Etienne
 */
 
 #include "list.h"
@@ -83,18 +83,5 @@ void			rm_elem_list(t_client **list, t_client *elem)
 	    }
 	  tmp = tmp->next;
 	}
-    }
-}
-
-void		list_ptr_list(t_client *list)
-{
-  t_client	*tmp;
-
-  tmp = list;
-  printf ("LIST : %p\n", list);
-  while (tmp)
-    {
-      printf ("ptr = %p\n", tmp);
-      tmp = tmp->next;
     }
 }
