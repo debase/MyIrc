@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Sat Apr 26 18:53:10 2014 Etienne
-** Last update Sat Apr 26 22:57:39 2014 Etienne
+** Last update Sat Apr 26 23:02:59 2014 Etienne
 */
 
 #include <string.h>
@@ -68,7 +68,7 @@ void		pv_msg(t_serveur *serv, t_client *client,
       if ((client_to = find_user(serv->client, client, cmd[1], buff)) == NULL)
 	return (send_info_msg(client, buff));
       epur_msg(str);
-      snprintf(buff, "%s", BUFF_SIZE,
+      snprintf(buff, BUFF_SIZE, "%s",
 	       str + strlen(cmd[0]) + strlen(cmd[1]) + 2);
       send_pv_msg(client, client_to, buff);
       send_pv_msg(client, client, buff);
