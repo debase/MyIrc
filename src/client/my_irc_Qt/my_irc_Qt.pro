@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     socket_client.c \
     connect.c \
     select_loop.c \
-    str_to_wordtab.c
+    str_to_wordtab.c \
+    ring_buff.c
 
 CXXFLAGS += -g
 CFLAGS += -g

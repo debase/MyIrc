@@ -30,6 +30,7 @@
 typedef struct  s_ring_buff
 {
     char        buff[BUFF_SIZE + 1];
+    char        cur_msg[BUFF_SIZE + 1];
     int         begin;
     int         end;
     int         display;
@@ -51,5 +52,6 @@ int         create_socket_client(const char *host, const char *port);
 void        send_msg(struct s_client *client, char *cmd);
 void        connect_client(t_client *client, char *param);
 void        select_loop(t_client *client);
+void		manage_client_rcv_msg(t_client *client);
 
 #endif /* !_CLIENT_H_ */

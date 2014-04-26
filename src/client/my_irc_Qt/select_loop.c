@@ -34,7 +34,7 @@ void                select_loop(t_client *client)
         {
             if (FD_ISSET(client->sfd, &client->read_fds))
             {
-                manage_client_rcv_msg(this->client);
+                manage_client_rcv_msg(client);
             }
         }
         else

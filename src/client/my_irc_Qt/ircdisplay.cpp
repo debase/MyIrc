@@ -58,6 +58,7 @@ void                ircDisplay::sendDisplay()
            snprintf(client->logger, BUFF_SIZE, ALLOC_ERR_MSG);
        if (client->logger[0])
        {
+           chat->moveCursor(QTextCursor::End);
            chat->insertPlainText("--->  " + QString(client->logger));
            memset(client->logger, 0, BUFF_SIZE);
        }
@@ -68,6 +69,17 @@ void                ircDisplay::sendDisplay()
 void        ircDisplay::loop()
 {
     select_loop(this->client);
-    std::cout << "loop !" << std::endl;
+    if (client->logger[0])
+    {
+        chat->moveCursor(QTextCursor::End);
+        chat->insertPlainText("--->  " + QString(client->logger));
+        memset(client->logger, 0, BUFF_SIZE);
+    }
+    if (client->rvcbuff.display == 1)
+    {
+        chat->moveCursor(QTextCursor::End);
+        chat->insertPlainText(QString(client->rvcbuff.buff) + "\n");
+        memset(&client->rvcbuff, 0, sizeof(client->rvcbuff));
+    }
     QTimer::singleShot(500, this, SLOT(loop()));
 }

@@ -27,11 +27,14 @@ void		send_msg(t_client *client, char *cmd)
           client->cmd[1][strlen(client->cmd[1]) - 1] = '\0';
       connect_client(client, client->cmd[1]);
     }
+  else if (!strcmp(client->cmd[0], "/server") && client->connect == CONNECTED)
+  {
+      snprintf(client->logger, BUFF_SIZE, "You are already connected\n");
+  }
   else if (client->connect == CONNECTED)
   {
       if (send(client->sfd, cmd, strlen(cmd), 0) <= 0)
       {
-          printf("toto\n");
           snprintf(client->logger, BUFF_SIZE,
                    "Server seem being broken ... You are now disconnect\n");
           client->connect = DISCONNECTED;
