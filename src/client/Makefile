@@ -5,7 +5,7 @@
 ## Login   <debas_e@epitech.net>
 ## 
 ## Started on  Sat Apr 26 21:11:20 2014 Etienne
-## Last update Sun Apr 27 01:40:19 2014 Etienne
+## Last update Sun Apr 27 19:39:36 2014 Etienne
 ##
 
 NAME		= ../../client
@@ -17,8 +17,6 @@ CXX		= g++
 CFLAGS        	= -Wall -Wall -Wextra
 
 CXXFLAGS      	= -Wall -Wall -Wextra
-
-LFLAGS		= -Wl,-O1
 
 LIBS		= -L/usr/lib64 -lQtGui -L/usr/X11R6/lib -lQtCore -lpthread
 
@@ -50,7 +48,7 @@ OBJECTS       	= main.o \
 LINK		= g++
 
 $(NAME): $(OBJECTS)
-	$(LINK) $(LFLAGS) -o $(NAME) $(OBJECTS) $(LIBS)
+	$(LINK) -o $(NAME) $(OBJECTS) $(LIBS)
 
 all:	$(NAME)
 
