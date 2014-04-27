@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Mon Apr 21 16:44:42 2014 Etienne
-** Last update Sun Apr 27 01:46:08 2014 Etienne
+** Last update Sun Apr 27 19:19:50 2014 Etienne
 */
 
 #include <unistd.h>
@@ -110,11 +110,10 @@ void		connect_client(t_client *client, char *param)
   client->sfd = create_socket_client(client->host, client->port);
   if (client->sfd < 0)
     {
-      snprintf(client->logger, BUFF_SIZE, "Error : couldn't connect to %s:%s\n",
+      snprintf(client->logger, BUFF_SIZE,
+	       "Error : couldn't connect to %s:%s\n",
 	       client->host, client->port);
     }
   else
-    {
       client->connect = CONNECTED;
-    }
 }

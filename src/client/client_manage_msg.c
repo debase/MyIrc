@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Thu Apr 17 00:07:25 2014 Etienne
-** Last update Sun Apr 27 01:46:42 2014 Etienne
+** Last update Sun Apr 27 19:19:25 2014 Etienne
 */
 
 #include <string.h>
@@ -28,11 +28,8 @@ void		send_msg(t_client *client, char *cmd)
       connect_client(client, client->cmd[1]);
     }
   else if (!strcmp(client->cmd[0], "/server") && client->connect == CONNECTED)
-    {
-      snprintf(client->logger, BUFF_SIZE, "You are already connected\n");
-    }
+    snprintf(client->logger, BUFF_SIZE, "You are already connected\n");
   else if (client->connect == CONNECTED)
-    {
       if (send(client->sfd, cmd, strlen(cmd), 0) <= 0)
 	{
           snprintf(client->logger, BUFF_SIZE,
@@ -40,7 +37,6 @@ void		send_msg(t_client *client, char *cmd)
           client->connect = DISCONNECTED;
           close(client->sfd);
 	}
-    }
   else
     snprintf(client->logger, BUFF_SIZE, "You are not connected"
 	     " : Use /server <host> <port> to connect you\n");
