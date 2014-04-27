@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Fri Apr 25 14:36:35 2014 Etienne
-** Last update Sun Apr 27 01:47:17 2014 Etienne
+** Last update Sun Apr 27 19:22:04 2014 Etienne
 */
 
 #include <unistd.h>
@@ -20,10 +20,10 @@ static int		add_char_buff(t_ring_buff *ring_buff, char c)
       ring_buff->end++;
     }
   else
-  {
-    ring_buff->buff[ring_buff->end] = '\n';
-  }
-    return (1);
+    {
+      ring_buff->buff[ring_buff->end] = '\n';
+    }
+  return (1);
 }
 
 static int	put_ring_buff(t_ring_buff *ring_buff, char *buff, ssize_t len)
@@ -41,15 +41,15 @@ static int	put_ring_buff(t_ring_buff *ring_buff, char *buff, ssize_t len)
     {
       if (ring_buff->buff[ring_buff->begin] == '\n')
 	{
-        index = ring_buff->begin;
-    }
+	  index = ring_buff->begin;
+	}
       ring_buff->begin++;
     }
   if (index != -1)
-  {
+    {
       ring_buff->buff[index] = '\0';
       return (1);
-  }
+    }
   return (0);
 }
 

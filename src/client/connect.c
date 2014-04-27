@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Mon Apr 21 16:44:42 2014 Etienne
-** Last update Sun Apr 27 19:19:50 2014 Etienne
+** Last update Sun Apr 27 19:23:55 2014 Etienne
 */
 
 #include <unistd.h>
@@ -115,5 +115,5 @@ void		connect_client(t_client *client, char *param)
 	       client->host, client->port);
     }
   else
-      client->connect = CONNECTED;
+    client->connect = CONNECTED;
 }

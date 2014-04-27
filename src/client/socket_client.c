@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Mon Apr  7 23:39:28 2014 Etienne
-** Last update Tue Apr  8 14:08:58 2014 Etienne
+** Last update Sun Apr 27 19:21:05 2014 Etienne
 */
 
 #include <unistd.h>
@@ -22,13 +22,13 @@ int			find_socketfd(struct addrinfo *result)
   while (result)
     {
       fd_socket = socket(result->ai_family, result->ai_socktype,
-             result->ai_protocol);
+			 result->ai_protocol);
       if (fd_socket > 0)
-    {
-      if (connect(fd_socket, result->ai_addr, result->ai_addrlen) != -1)
-        break ;
-      close(fd_socket);
-    }
+	{
+	  if (connect(fd_socket, result->ai_addr, result->ai_addrlen) != -1)
+	    break ;
+	  close(fd_socket);
+	}
       result = result->ai_next;
     }
   if (result == NULL)
