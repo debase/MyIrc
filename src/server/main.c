@@ -5,20 +5,15 @@
 ** Login   <maxime@epitech.net>
 **
 ** Started on  Tue Apr  8 16:50:26 2014 Maxime
-** Last update Thu Apr 24 14:49:23 2014 Etienne
+** Last update Sun Apr 27 21:41:17 2014 Etienne
 */
 
 #include <string.h>
 #include <sys/select.h>
 #include <sys/time.h>
+#include <signal.h>
 #include "serveur.h"
 #include "str_to_wordtab.h"
-
-int		usage(char *pname)
-{
-  printf("Uage : %s <Port>\n", pname);
-  return (EXIT_SUCCESS);
-}
 
 void		set_fd_client(fd_set *readfd, t_serveur *serv)
 {
@@ -86,10 +81,12 @@ int		main(int ac, char *argv[])
 
   if (ac != 2)
     {
-      return (usage(argv[0]));
+      printf("Uage : %s <Port>\n", argv[0]);
+      return (EXIT_SUCCESS);
     }
   if (init_serveur(&serveur, argv[1]) != -1)
     {
+      signal(SIGPIPE, SIG_IGN);
       serv_loop(&serveur);
     }
   return (EXIT_SUCCESS);
