@@ -5,10 +5,12 @@
 ## Login   <maxime@epitech.net>
 ## 
 ## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Sat Apr 26 22:24:41 2014 Etienne
+## Last update Sun Apr 27 01:57:18 2014 Etienne
 ##
 
-NAME		= ../../serveur
+BINDIR		= ../../
+
+NAME		= $(addprefix $(BINDIR), serveur)
 
 INCLUDE		= ./includes/
 

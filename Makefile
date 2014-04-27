@@ -1,35 +1,35 @@
 ##
-## Makefile for ftp in /home/maxime/projet/actu/PSU_2013_myftp
+## Makefile for Makefile in /tmp/PSU_2013_myirc
 ## 
-## Made by Maxime
-## Login   <maxime@epitech.net>
+## Made by Etienne
+## Login   <debas_e@epitech.net>
 ## 
-## Started on  Sat Mar 29 01:31:11 2014 Maxime
-## Last update Wed Apr  9 10:28:53 2014 Maxime
+## Started on  Sun Apr 27 01:59:22 2014 Etienne
+## Last update Sun Apr 27 02:01:12 2014 Etienne
 ##
 
-NAME=		serveur/client
+NAME    = My_Irc
 
-SUB_DIR=	src/server \
-		src/client
+PATHS   = src/server \
+          src/client
 
-$(NAME)	:
-		@for dir in $(SUB_DIR); do \
-		make -C $$dir all; \
-		done
+$(NAME):
+	@for dir in $(PATHS); do \
+	echo -e "\e[30m [\e[34mCompiling: \e[31m$$dir\e[30m]\e[0m"; make --no-print-directory -C $$dir; \
+	done
 
-all:		$(NAME)
+all: $(NAME)
 
 clean:
-		@for dir in $(SUB_DIR); do \
-		make -C $$dir clean; \
-		done
+	@for dir in $(PATHS); do \
+	echo -e "\e[30m [\e[34mCleaning: \e[31m$$dir\e[30m]\e[0m"; make --no-print-directory -C $$dir clean; \
+	done
 
 fclean:
-		@for dir in $(SUB_DIR); do \
-		make -C $$dir fclean; \
-		done
+	@for dir in $(PATHS); do \
+	echo -e "\e[30m [\e[34mRemoving: \e[31m$$dir\e[30m]\e[0m"; make --no-print-directory -C $$dir fclean; \
+	done
 
-re:		fclean	all
+re:     fclean all
 
 .PHONY: $(NAME) all clean fclean re
