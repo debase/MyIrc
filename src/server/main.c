@@ -5,7 +5,7 @@
 ** Login   <maxime@epitech.net>
 **
 ** Started on  Tue Apr  8 16:50:26 2014 Maxime
-** Last update Sun Apr 27 21:41:17 2014 Etienne
+** Last update Sun Apr 27 23:06:14 2014 Etienne
 */
 
 #include <string.h>
@@ -55,6 +55,7 @@ void			serv_loop(t_serveur *serv)
 {
   fd_set		readfd;
   int			select_ret;
+  struct timeval	timeout;
 
   select_ret = 0;
   while (select_ret != -1)
@@ -62,7 +63,9 @@ void			serv_loop(t_serveur *serv)
       FD_ZERO(&readfd);
       FD_SET(serv->fd, &readfd);
       set_fd_client(&readfd, serv);
-      select_ret = select(serv->max_fd + 1, &readfd, NULL, NULL, NULL);
+      timeout.tv_sec = 1;
+      timeout.tv_usec = 0;
+      select_ret = select(serv->max_fd + 1, &readfd, NULL, NULL, &timeout);
       if (select_ret != -1)
 	{
 	  if (FD_ISSET(serv->fd, &readfd))
