@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Wed Apr 23 14:24:03 2014 Etienne
-** Last update Wed Apr 23 16:16:29 2014 Etienne
+** Last update Sun Apr 27 19:24:57 2014 Etienne
 */
 
 #ifndef _STR_TO_WORDTAB_H_
@@ -19,6 +19,6 @@
 
 # define STR_WORD_TAB_ERROR      ((void *)-1)
 
-char            **str_to_wordtab(char *str, char *token);
+char		**str_to_wordtab(char *str, char *token);
 
 #endif /* !_STR_TO_WORDTAB_H_ */

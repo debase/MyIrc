@@ -5,7 +5,7 @@
 ** Login   <debas_e@epitech.net>
 **
 ** Started on  Tue Apr  8 14:12:36 2014 Etienne
-** Last update Wed Apr 16 21:19:28 2014 Etienne
+** Last update Sun Apr 27 19:26:04 2014 Etienne
 */
 
 #ifndef _CLIENT_H_
@@ -48,10 +48,10 @@ typedef struct  s_client
     t_ring_buff rvcbuff;
 }               t_client;
 
-int         create_socket_client(const char *host, const char *port);
-void        send_msg(struct s_client *client, char *cmd);
-void        connect_client(t_client *client, char *param);
-void        select_loop(t_client *client);
+int		create_socket_client(const char *host, const char *port);
+void		send_msg(struct s_client *client, char *cmd);
+void		connect_client(t_client *client, char *param);
+void		select_loop(t_client *client);
 void		manage_client_rcv_msg(t_client *client);
 
 #endif /* !_CLIENT_H_ */
