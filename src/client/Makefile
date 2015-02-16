@@ -20,8 +20,8 @@ CXXFLAGS      	= -Wall -Wall -Wextra
 
 LIBS		= -L/usr/lib64 -lQtGui -L/usr/X11R6/lib -lQtCore -lpthread
 
-CXXINCPATH     	= -I/usr/share/qt4/mkspecs/default -I/usr/include/QtCore
-CXXINCPATH     	+= -I/usr/include/QtGui -I/usr/include -I./includes -I.
+CXXINCPATH     	= -I/usr/share/qt4/mkspecs/linux-g++-64 -I/usr/include/qt4/QtCore
+CXXINCPATH     	+= -I/usr/include/qt4/QtGui -I/usr/include/qt4 -I./includes -I.
 
 CINCPATH     	= -I./includes/
 
